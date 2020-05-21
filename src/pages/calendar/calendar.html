@@ -1,0 +1,23 @@
+<ion-header>
+	<ion-navbar class="header_font" color="primary">
+		<ion-title>Calendar</ion-title>
+
+	</ion-navbar>
+</ion-header>
+Welcome to Calendar
+<ion-content padding>
+	<object style="max-width: 156px; width: 100%; margin: 30px auto 30px auto; left: 0; right: 0; display: block;"
+		type="image/svg+xml" data="../../assets/imgs/logo.svg">
+		Your browser does not support SVG
+	</object>
+	<div class="btn_group">
+		<button ion-button block class="opt_btn" (click)="goweeklycalender()"><img
+				style="max-width: 15px; margin-right: 5px;" src="../../assets/imgs/inputclndr.svg" />Weekly</button>
+		<button ion-button block class="opt_btn" (click)="gomonthlycalender()"><img
+				style="max-width: 15px; margin-right: 5px;" src="../../assets/imgs/inputclndr.svg" />Monthly</button>
+		<button ion-button block class="opt_btn" (click)="goaddevent()"><img style="max-width: 15px; margin-right: 5px;"
+				src="../../assets/imgs/inputclndr.svg" />Add Event</button>
+		<button ion-button block class="opt_btn"><img style="max-width: 15px; margin-right: 5px;"
+				src="../../assets/imgs/inputclndr.svg" />Import Events from Other Calendars</button>
+	</div>
+</ion-content>
