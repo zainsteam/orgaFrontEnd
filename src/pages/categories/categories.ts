@@ -46,7 +46,7 @@ export class CategoriesPage {
 			content: 'Please wait...'
 		});
 		loading.present();
-		let _url: string = "http://orga-nice-app.com/api/v1/user/user_category";
+		let _url: string = "http://52.29.115.88/api/v1/user/user_category";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id
 		}
@@ -94,7 +94,7 @@ export class CategoriesPage {
 						let postdata = {
 							'cat_id': cat_id
 						}
-						let _url: string = "http://orga-nice-app.com/api/v1/user/delete_category";
+						let _url: string = "http://52.29.115.88/api/v1/user/delete_category";
 						this.http.post(_url, postdata, { headers: this.headers })
 							.subscribe(
 								(data) => {

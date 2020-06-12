@@ -20,6 +20,9 @@ import { HomePage } from '../../pages/home/home';
 	templateUrl: 'profile.html',
 })
 export class ProfilePage {
+	mobileToken;
+
+	public C_date: string = new Date().toISOString();
 
 	signupformupdate: FormGroup;
 	public UserDetails = Array();
@@ -30,6 +33,8 @@ export class ProfilePage {
 	constructor(private toastCtrl: ToastController, public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, private storage: Storage, public http: Http, ) {
 	}
 	ngOnInit() {
+		console.log(localStorage.getItem('mobiletoken'));
+		this.mobileToken = localStorage.getItem('mobiletoken');
 		let EMAILPATTERN = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 		this.signupformupdate = new FormGroup({
 			name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30)]),
@@ -40,13 +45,15 @@ export class ProfilePage {
 			//cnfpassword: new FormControl('', [Validators.required]),
 		});
 	}
-	ionViewDidLoad() {
+	 ionViewDidLoad() {
 		this.storage.get("userdetails").then((userval) => {
-			//console.log('User details is', userval);
+			console.log('User details is', userval);
 			this.UserDetails = userval;
 			//console.log(this.UserDetails);
 			//console.log(this.UserDetails['userdetails'].id);
+			this.user_details();
 		});
+
 		//console.log(this.UserDetails[0]);
 
 
@@ -74,8 +81,8 @@ export class ProfilePage {
 			});
 
 			loading.present();
-			//let _url: string = "http://orga-nice-app.com/api/v1/user/register";
-			let _url: string = "http://orga-nice-app.com/api/v1/user/profileupdate";
+			//let _url: string = "http://52.29.115.88/api/v1/user/register";
+			let _url: string = "http://52.29.115.88/api/v1/user/profileupdate";
 			this.http.post(_url, regdata, { headers: this.headers })
 				.subscribe(
 					(data) => {
@@ -117,12 +124,12 @@ export class ProfilePage {
 		}
 	}
 	ionViewDidEnter() {
-		this.user_details();
+		// this.user_details();
 	}
 
 	user_details() {
 		this.userdetails = this.UserDetails['userdetails'];
-		console.log(this.userdetails);
+		console.log('after details',this.userdetails);
 	}
 
 	changepassword() {

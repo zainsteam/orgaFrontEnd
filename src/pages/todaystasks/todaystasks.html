@@ -28,7 +28,7 @@
 			</ion-row>
 
 			<div class="tab" *ngFor="let item of allTasksDaily[0]; let i = index">
-				<div class="tab">
+				<div class="tab" *ngIf="item.status == 0">
 					<input type="checkbox" id="chckd{{i}}">
 					<label class="tab-label" for="chckd{{i}}">{{item.name}}</label>
 					<div class="tab-content">
@@ -97,7 +97,7 @@
 			</ion-row>
 
 			<div class="tab" *ngFor="let item of allTasksWeekly[0]; let i = index">
-				<div class="tab">
+				<div class="tab" *ngIf="item.status == 0">
 					<input type="checkbox" id="chckw{{i}}">
 					<label class="tab-label" for="chckw{{i}}">{{item.name}}</label>
 					<div class="tab-content">
@@ -166,7 +166,7 @@
 				</div>
 			</ion-row>
 			<div class="tab" *ngFor="let item of allTasksMonthly[0]; let i = index">
-				<div class="tab">
+				<div class="tab" *ngIf="item.status == 0">
 					<input type="checkbox" id="chckm{{i}}">
 					<label class="tab-label" for="chckm{{i}}">{{item.name}}</label>
 					<div class="tab-content">
@@ -235,7 +235,7 @@
 			</ion-row>
 
 			<div class="tab" *ngFor="let item of allTasksUnassign[0]; let i = index">
-				<div class="tab">
+				<div class="tab" *ngIf="item.status == 0">
 					<input type="checkbox" id="chcko{{i}}">
 					<label class="tab-label" for="chcko{{i}}">{{item.name}}</label>
 					<div class="tab-content">

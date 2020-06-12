@@ -54,7 +54,7 @@ export class AddcategoryPage {
 				'category_name': data.category_name
 			};
 
-			let _url: string = "http://orga-nice-app.com/api/v1/user/add_category";
+			let _url: string = "http://52.29.115.88/api/v1/user/add_category";
 			this.http.post(_url, add_category_data, { headers: this.headers })
 				.subscribe(
 					(data) => {

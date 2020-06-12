@@ -44,7 +44,7 @@ export class EditnewtaskPage {
 
 	ngOnInit() {
 		this.newTaskform = new FormGroup({
-			task_name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(500)]),
+			task_name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
 			duration: new FormControl('', [Validators.required]),
 			//bring_with_you: new FormControl('', [Validators.required]),
 			bring_with_you: new FormControl(''),
@@ -86,7 +86,7 @@ export class EditnewtaskPage {
 
 		loading.present();
 
-		let _url: string = "http://orga-nice-app.com/api/v1/user/get_user_taskbyid";
+		let _url: string = "http://52.29.115.88/api/v1/user/get_user_taskbyid";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id,
 			'id': taskid
@@ -132,7 +132,7 @@ export class EditnewtaskPage {
 	}
 	//get user category
 	get_user_categories() {
-		let _url: string = "http://orga-nice-app.com/api/v1/user/user_category";
+		let _url: string = "http://52.29.115.88/api/v1/user/user_category";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id
 		}
@@ -195,7 +195,7 @@ export class EditnewtaskPage {
 					'id': data.taskid,
 				}
 				console.log(taskdata);
-				let _url: string = "http://orga-nice-app.com/api/v1/user/update_task";
+				let _url: string = "http://52.29.115.88/api/v1/user/update_task";
 				this.http.post(_url, taskdata, { headers: this.headers })
 					.subscribe(
 						(data) => {
@@ -239,7 +239,7 @@ export class EditnewtaskPage {
 					'due_date': data.due_date,
 					'type': 'task'
 				}
-				let _url: string = "http://orga-nice-app.com/api/v1/user/create_task";
+				let _url: string = "http://52.29.115.88/api/v1/user/create_task";
 				this.http.post(_url, taskdata, { headers: this.headers })
 					.subscribe(
 						(data) => {

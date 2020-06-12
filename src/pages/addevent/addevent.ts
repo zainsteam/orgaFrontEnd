@@ -68,7 +68,7 @@ export class AddeventPage {
 	}
 	//get user category
 	get_user_categories() {
-		let _url: string = "http://orga-nice-app.com/api/v1/user/user_category";
+		let _url: string = "http://52.29.115.88/api/v1/user/user_category";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id
 		}
@@ -132,9 +132,9 @@ export class AddeventPage {
 				'minutes_before': data.minutes_before,
 				'repetition': data.repetition,
 				'type': 'event'
-			}
+			} 
 			console.log(taskdata);
-			let _url: string = "http://orga-nice-app.com/api/v1/user/create_task";
+			let _url: string = "http://52.29.115.88/api/v1/user/create_task";
 			this.http.post(_url, taskdata, { headers: this.headers })
 				.subscribe(
 					(data) => {

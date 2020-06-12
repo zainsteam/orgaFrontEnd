@@ -23,6 +23,7 @@ export class LoginPage {
 	public hidecontinue = true;
 	public hideregister = false;
 	public hideotplogin = false;
+	mobileToken;
 
 	loginform: FormGroup;
 	loginData = { "email": "", "devicetoken": "", "otp": "" };
@@ -32,11 +33,35 @@ export class LoginPage {
 	}
 
 	ngOnInit() {
+		this.getMobileToken();
 		let EMAILPATTERN = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 		this.loginform = new FormGroup({
 			email: new FormControl('', [Validators.required, Validators.pattern(EMAILPATTERN)]),
 			otp: new FormControl('', Validators.required)
 		});
+	}
+
+	getMobileToken() {
+		if ( (this.platform.is('ios') || this.platform.is('android')) && this.platform.is('cordova'))
+		{
+			//Notifications
+			this.fcm.subscribeToTopic('all');
+			this.fcm.getToken().then(token=>{
+				this.mobileToken = token;
+				console.log(token);
+			})
+			this.fcm.onNotification().subscribe(data=>{
+				if(data.wasTapped){
+					console.log("Received in background");
+				} else {
+					console.log("Received in foreground");
+				};
+			})
+			this.fcm.onTokenRefresh().subscribe(token=>{
+				console.log(token);
+			});
+			//end notifications.
+		}
 	}
 
 	sentotplogin() {
@@ -53,7 +78,7 @@ export class LoginPage {
 		});
 
 		loading.present();
-		let _url: string = "http://orga-nice-app.com/api/v1/user/logotp";
+		let _url: string = "http://52.29.115.88/api/v1/user/logotp";
 		console.log(JSON.stringify(this.headers));
 		this.http.post(_url, regdata, { headers: this.headers })
 			.subscribe(
@@ -99,20 +124,28 @@ export class LoginPage {
 
 	login() {
 
-		debugger;
+	
+		// debugger;
+		console.log("mobiletoken", this.mobileToken);
+		localStorage.setItem('mobiletoken', this.mobileToken);
 		this.navCtrl.setRoot(HomePage);
 
 		if (this.loginform.valid) {
 			let data = this.loginform.value;
 
+			// let logindata = {
+			// 	"email": data.email,
+			// 	"devicetoken": 'sam',
+			// 	"otp": data.otp
+			// };
 			let logindata = {
 				"email": data.email,
-				"devicetoken": 'sam',
+				"devicetoken": this.mobileToken,
 				"otp": data.otp
 			};
 
 			// verifying that enter otp is correct
-			let _url: string = "http://orga-nice-app.com/api/v1/user/login";
+			let _url: string = "http://52.29.115.88/api/v1/user/login";
 			this.http.post(_url, logindata, { headers: this.headers })
 				.subscribe(
 					(data) => {

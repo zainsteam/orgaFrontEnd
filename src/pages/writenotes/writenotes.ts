@@ -57,7 +57,7 @@ export class WritenotesPage {
 			});
 
 			loading.present();
-			let _url: string = "http://orga-nice-app.com/api/v1/user/stickynotes";
+			let _url: string = "http://52.29.115.88/api/v1/user/stickynotes";
 			this.http.post(_url, notedata, { headers: this.headers })
 				.subscribe(
 					(data) => {

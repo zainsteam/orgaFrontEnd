@@ -47,7 +47,7 @@ export class ForgotpasswordPage {
 				'email': data.email
 			};
 
-			let _url: string = "http://orga-nice-app.com/api/v1/user/forgot_password";
+			let _url: string = "http://52.29.115.88/api/v1/user/forgot_password";
 			this.http.post(_url, forgot_password_data, { headers: this.headers })
 				.subscribe(
 					(data) => {

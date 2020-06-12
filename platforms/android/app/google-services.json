@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "21032310800",
+    "firebase_url": "https://organice-ed5b1.firebaseio.com",
+    "project_id": "organice-ed5b1",
+    "storage_bucket": "organice-ed5b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21032310800:android:d346e5764760005aead295",
+        "android_client_info": {
+          "package_name": "com.organice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21032310800-943e8j3hsat9mn2qj8il7g43uhctr2ka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5svEPYyZtL1mH7xOc2C0xbTAfs2M4H9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21032310800-943e8j3hsat9mn2qj8il7g43uhctr2ka.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

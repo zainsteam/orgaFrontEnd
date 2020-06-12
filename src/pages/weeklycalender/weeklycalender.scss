@@ -1,3 +1,6 @@
+.scheduler_container_resize_watcher{
+  display: none;
+}
 .dhtmlx_message_area {
   position: fixed;
   right   : 5px;
@@ -1815,7 +1818,8 @@ div.icon_delete {
   background  : #fff;
   border-top  : 1px solid #cecece;
   border-right: 1px solid #cecece;
-  z-index     : 2
+  z-index     : 2;
+  height: 38px !important;
 }
 
 .dhx_cal_data {
@@ -4376,7 +4380,8 @@ div.icon_delete {
   width                      : 600px;
   overflow-y                 : auto;
   overflow-x                 : hidden;
-  -webkit-overflow-scrolling : touch
+  -webkit-overflow-scrolling : touch;
+  top: 100px !important;
 }
 
 .dhx_cal_data,
@@ -4396,7 +4401,8 @@ div.icon_delete {
   font-size       : 11px;
   font-weight     : inherit;
   line-height     : 16px;
-  color           : #767676
+  color           : #767676;
+  height: 40px !important;
 }
 
 .dhx_scale_holder {

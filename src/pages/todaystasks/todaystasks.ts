@@ -41,14 +41,19 @@ export class TodaystasksPage {
 		this.get_user_tasks();
 	}
 	get_user_tasks() {
+		this.allTasks = [];
+		this.allTasksDaily = [];
+		this.allTasksWeekly = [];
+		this.allTasksMonthly = [];
+		this.allTasksUnassign = [];
 		console.log(this.urlGet);
 		let loading = this.loadingCtrl.create({
 			content: 'Please wait...'
 		});
 
-		debugger;
+		// debugger;
 		loading.present();
-		let _url: string = this.urlGet + "api/v1/user/get_user_todaystask";
+		let _url: string = "http://52.29.115.88/api/v1/user/get_user_todaystask";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id
 		}
@@ -110,7 +115,9 @@ export class TodaystasksPage {
 							console.log('Log in toast');
 						});
 						toast.present();
-						this.navCtrl.push(TasksPage);
+
+						this.get_user_tasks() ;
+						// this.navCtrl.push(TodaystasksPage);
 					}
 
 				});
@@ -153,7 +160,8 @@ export class TodaystasksPage {
 							console.log('Log in toast');
 						});
 						toast.present();
-						this.navCtrl.push(TasksPage);
+						this.get_user_tasks() ;
+						// this.navCtrl.push(TasksPage);
 					}
 				});
 	}
