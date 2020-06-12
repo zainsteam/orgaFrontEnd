@@ -1,0 +1,57 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-admob-free": {
+      "ADMOB_APP_ID": "ca-app-pub-7339534371956220~7273535038",
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-plugin-fcm-with-dependecy-updated": {
+      "FCM_VERSION": "19.0.0",
+      "GRADLE_TOOLS_VERSION": "3.5.3",
+      "GOOGLE_SERVICES_VERSION": "4.3.3",
+      "SUPPORT_LIBRARY_VERSION": "28.0.0",
+      "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher",
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-plugin-ionic-webview": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.organice"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-admob-sdk": {
+      "PLAY_SERVICES_VERSION": "11.0.4",
+      "PACKAGE_NAME": "com.organice"
+    },
+    "cordova-promise-polyfill": {
+      "PACKAGE_NAME": "com.organice"
+    }
+  }
+}
