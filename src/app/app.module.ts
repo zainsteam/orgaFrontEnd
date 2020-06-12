@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { FCM } from '@ionic-native/fcm';
+import { AdMobFree } from '@ionic-native/admob-free';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -142,11 +143,12 @@ import { TermsandconditionPage } from '../pages/termsandcondition/termsandcondit
   providers: [
     StatusBar,
     SplashScreen,
+    AdMobFree,
 	//Push,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Network,
     GlobalProvider,
-	FCM,
+    FCM,
     //FcmProvider
   ]
 })

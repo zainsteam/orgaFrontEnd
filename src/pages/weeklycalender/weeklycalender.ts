@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { NavController, NavParams, PopoverController, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, ToastController, LoadingController,Platform,App } from 'ionic-angular';
 import { PopoverComponent } from '../../components/popover/popover';
 
 import { GlobalProvider } from '../../providers/global/global';
@@ -29,10 +29,11 @@ export class WeeklycalenderPage implements OnInit {
 	allTasksMonthly = Array();
 	allTasksUnassign = Array();
 	urlGet: string = '';
+	subscription;
 	private headers: Headers = new Headers({ 'Content-Type': 'application/json' });
 
 	@ViewChild("scheduler_here") schedulerContainer: ElementRef;
-	constructor(public loadingCtrl: LoadingController, public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, private storage: Storage, public http: Http, private toastCtrl: ToastController) {
+	constructor(public app: App, private platform: Platform,public loadingCtrl: LoadingController, public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, private storage: Storage, public http: Http, private toastCtrl: ToastController) {
 		// // debugger;
 		this.urlGet = global.url;
 	}
@@ -46,6 +47,9 @@ export class WeeklycalenderPage implements OnInit {
 			scheduler.endLightbox(eventId);
 			console.log('opened');
 		}
+
+		this.subscription = 0;
+
 	}
 
 	ionViewDidLoad() {
@@ -61,7 +65,35 @@ export class WeeklycalenderPage implements OnInit {
 	ionViewDidEnter() {
 		console.log('ionViewDidLoad TasksPage');
 		this.get_user_tasks();
+
+		this.subscription = 1;
+		//Registration of push in Android and Windows Phone
+		this.platform.registerBackButtonAction(() => {
+
+			if(this.subscription == 1)
+			{
+				var evs = scheduler.getEvents();
+
+				// console.log(evs[evs.length]);
+				for (var i=0; i<evs.length; i++)
+				{
+					scheduler.editStop(evs[i].id);
+				}
+				// scheduler.eventRemove(evs[evs.length] );
+			}
+			else
+			{
+				let nav = this.app.getActiveNav();
+				if (nav.canGoBack()){
+				nav.pop();
+				}else{
+				this.platform.exitApp();
+				}
+			}
+			console.log("run backbuttton");
+		});
 	}
+
 
 	//popover cntrl
 	presentPopover(myEvent) {
@@ -84,6 +116,8 @@ export class WeeklycalenderPage implements OnInit {
 		}
 	}
 
+
+
 	dismissLoading() {
 		if (this.loading) {
 			this.loading.dismiss();
@@ -103,7 +137,8 @@ export class WeeklycalenderPage implements OnInit {
 
 		scheduler.config.touch_swipe_dates = true;
 
-		scheduler.config.touch_drag = 750;
+		scheduler.config.touch_drag = 150;
+		scheduler.config.show_loading = true;
 		scheduler.config.touch = "force";
 		scheduler.init(this.schedulerContainer.nativeElement, new Date(), "week");
 
@@ -112,6 +147,57 @@ export class WeeklycalenderPage implements OnInit {
 			// debugger;
 			console.log('event added ', ev);
 			console.log('event id ', id);
+			var start_date_Hours = ev.start_date.getHours();
+			var start_date_mins = ev.start_date.getMinutes();
+			var end_date_Hours = ev.end_date.getHours();
+			var end_date_mins = ev.end_date.getMinutes();
+			var start_time =  start_date_Hours + ':' +  start_date_mins;
+			var end_time =  end_date_Hours + ':' +  end_date_mins;
+			var duration_hours = end_date_Hours - start_date_Hours;
+			var duration_min = end_date_mins - start_date_mins;
+			var duration = duration_hours +':' + duration_min;
+			console.log('start date', duration);
+
+
+			let taskdata = {
+				'user_id': this.UserDetails['userdetails'].id,
+				'task_name': ev.text,
+				'duration': duration,
+				'bring_with_you': '',
+				'frequency': '',
+				'if_not_completed': '',
+				'priority': '',
+				'category': '',
+				'color': 'blue',
+				'due_date': ev.end_date,
+				'sub_tasks': '',
+				'reminders': '',
+				'minutes_before': 15,
+				'repetition': 'daily',
+				'type': 'event'
+			} 
+
+			let _url: string = "http://52.29.115.88/api/v1/user/create_task";
+			this.http.post(_url, taskdata, { headers: this.headers })
+				.subscribe(
+					(data) => {
+						let result = JSON.parse(data["_body"]);
+						console.log(result);
+
+						let toast = this.toastCtrl.create({
+							message: result.message,
+							duration: 3000,
+							position: 'top'
+						});
+
+						toast.onDidDismiss(() => {
+							console.log('Dismissed toast');
+							// this.newTaskform.reset();
+							// this.navCtrl.push(CalendarPage);
+						});
+
+						toast.present();
+					});
 		});
 
 		scheduler.attachEvent("onEventDropOut", function (id, original, to, e) {
@@ -233,6 +319,7 @@ export class WeeklycalenderPage implements OnInit {
 				}, err => {
 					this.dismissLoading();
 				});
+
 
 		this.get_user_unassigntasks();
 	}

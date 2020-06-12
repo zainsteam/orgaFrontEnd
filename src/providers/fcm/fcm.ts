@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+// import { FCM } from '@ionic-native/fcm';
+import { Platform } from 'ionic-angular';
 
 /*
   Generated class for the FcmProvider provider.
@@ -10,8 +12,19 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class FcmProvider {
 
-  constructor(public http: HttpClient) {
+  mobileToken;
+
+  constructor(public http: HttpClient, 
+    // private fcm: FCM,
+    public platform: Platform) {
     console.log('Hello FcmProvider Provider');
   }
+
+  getToken()
+  {
+    
+  }
+
+
 
 }

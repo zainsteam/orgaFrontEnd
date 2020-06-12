@@ -86,8 +86,13 @@
 
 			<ion-item class="input_item">			
 				<ion-label class="input_label" color="inputcolor" floating><img style="max-width: 14px; position: absolute; left: 0; top: 4px;" src="../../assets/imgs/inputclndr.svg"/>Date of Birth</ion-label>
-				<ion-datetime class="input_form" displayFormat="DD MMMM YYYY" [(ngModel)]="userdetails.dob" formControlName="dob" min="1970" max="2005-01-01" >
+				<ion-datetime class="input_form" displayFormat="D MMM YYYY" [(ngModel)]="userdetails.dob" formControlName="dob" >
 				</ion-datetime>
+			</ion-item>
+
+			<ion-item class="input_item">			
+				<ion-label class="input_label" color="inputcolor" floating><img style="max-width: 18px; position: absolute; left: 0;" src="../../assets/imgs/inputuser.svg"/>Mobile Token</ion-label>
+				<ion-input type="text" value="{{mobileToken}}" ></ion-input>
 			</ion-item>
 
 			<ion-item no-lines *ngIf="(signupformupdate.get('dob').hasError('required') && signupformupdate.get('dob').touched)">

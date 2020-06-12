@@ -60,7 +60,7 @@ export class EditnotesPage {
 		});
 
 		loading.present();
-		let _url: string = "http://orga-nice-app.com/api/v1/user/getnotesbyid";
+		let _url: string = "http://52.29.115.88/api/v1/user/getnotesbyid";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id,
 			'id': noteid
@@ -91,7 +91,7 @@ export class EditnotesPage {
 			});
 
 			loading.present();
-			let _url: string = "http://orga-nice-app.com/api/v1/user/stickynotesupdate";
+			let _url: string = "http://52.29.115.88/api/v1/user/stickynotesupdate";
 			this.http.post(_url, notedata, { headers: this.headers })
 				.subscribe(
 					(data) => {

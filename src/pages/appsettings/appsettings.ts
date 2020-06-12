@@ -79,7 +79,7 @@ export class AppsettingsPage {
 	get_user_categories() {
 		let headers: Headers = new Headers({ 'Content-Type': 'application/json' });
 
-		let _url: string = "http://orga-nice-app.com/api/v1/user/user_category";
+		let _url: string = "http://52.29.115.88/api/v1/user/user_category";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id
 		}

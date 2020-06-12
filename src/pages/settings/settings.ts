@@ -36,7 +36,7 @@ export class SettingsPage {
 	}
 	gotermandconditions() {
 		this.navCtrl.push(TermandconditionsPage)
-		//  window.open('http://orga-nice-app.com/Mobile-App-Terms.pdf', '_system', 'location=yes');
+		//  window.open('http://52.29.115.88/Mobile-App-Terms.pdf', '_system', 'location=yes');
 	}
 	gorateus() {
 		window.open('https://play.google.com/store', '_system', 'location=yes');

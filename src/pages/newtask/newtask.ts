@@ -5,6 +5,8 @@ import { TasksPage } from '../tasks/tasks';
 import { FormControl, FormGroup, Validators, Form } from '@angular/forms';
 import { Http, Headers, Response } from '@angular/http';
 import { Storage } from '@ionic/storage';
+import * as moment from 'moment';
+
 @Component({
 	selector: 'page-newtask',
 	templateUrl: 'newtask.html',
@@ -21,11 +23,14 @@ export class NewtaskPage {
 	taskdata = { 'task_name': '', 'duration': '', 'bring_with_you': '', 'frequency': '', 'not_completed': '', 'priority': '', 'category': '', 'color': '', 'due_date': '', 'type': '' }
 	private headers: Headers = new Headers({ 'Content-Type': 'application/json' });
 	constructor(public loadingCtrl: LoadingController, private nav: Nav, public navCtrl: NavController, public http: Http, public navParams: NavParams, public popoverCtrl: PopoverController, public storage: Storage, public toastCtrl: ToastController) {
+		
 	}
 
 	ngOnInit() {
+		this.taskdata.due_date = moment(this.due_date).local().format("YYYY-MM-DD[T]HH:mm:ss.000") + 'Z';
+
 		this.newTaskform = new FormGroup({
-			task_name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(500)]),
+			task_name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
 			duration: new FormControl('', [Validators.required]),
 			//bring_with_you: new FormControl('', [Validators.required]),
 			bring_with_you: new FormControl(''),
@@ -38,9 +43,11 @@ export class NewtaskPage {
 			due_date: new FormControl(''),
 			sub_task1: new FormControl(),
 		});
-		this.taskdata.duration = "00:00";
+		// this.taskdata.duration = "00:00";
 	}
+
 	ionViewDidLoad() {
+
 		this.storage.get("userdetails").then((userval) => {
 			console.log('User details is', userval);
 			this.UserDetails = userval;
@@ -54,7 +61,7 @@ export class NewtaskPage {
 	}
 	//get user category
 	get_user_categories() {
-		let _url: string = "http://orga-nice-app.com/api/v1/user/user_category";
+		let _url: string = "http://52.29.115.88/api/v1/user/user_category";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id
 		}
@@ -123,7 +130,7 @@ export class NewtaskPage {
 					'type': 'task'
 				}
 				console.log(taskdata);
-				let _url: string = "http://orga-nice-app.com/api/v1/user/create_task";
+				let _url: string = "http://52.29.115.88/api/v1/user/create_task";
 				this.http.post(_url, taskdata, { headers: this.headers })
 					.subscribe(
 						(data) => {
@@ -138,14 +145,15 @@ export class NewtaskPage {
 								const startIndex = this.navCtrl.getActive().index - 1;
 								this.navCtrl.remove(startIndex, 1);
 
-								const startIndex2 = this.navCtrl.getActive().index - 2;
-								this.navCtrl.remove(startIndex2, 1);
+								// changes zain
+								// const startIndex2 = this.navCtrl.getActive().index - 2;
+								// this.navCtrl.remove(startIndex2, 1);
 
 							});
 							let toast = this.toastCtrl.create({
 								message: result.message,
 								duration: 3000,
-								position: 'top'
+ 								position: 'top'
 							});
 
 							toast.onDidDismiss(() => {
@@ -168,7 +176,7 @@ export class NewtaskPage {
 					'due_date': data.due_date,
 					'type': 'task'
 				}
-				let _url: string = "http://orga-nice-app.com/api/v1/user/create_task";
+				let _url: string = "http://52.29.115.88/api/v1/user/create_task";
 				this.http.post(_url, taskdata, { headers: this.headers })
 					.subscribe(
 						(data) => {
@@ -189,8 +197,9 @@ export class NewtaskPage {
 									const startIndex = this.navCtrl.getActive().index - 1;
 									this.navCtrl.remove(startIndex, 1);
 
-									const startIndex2 = this.navCtrl.getActive().index - 2;
-									this.navCtrl.remove(startIndex2, 1);
+									// Changes Zain
+									// const startIndex2 = this.navCtrl.getActive().index - 2;
+									// this.navCtrl.remove(startIndex2, 1);
 
 								});
 							});

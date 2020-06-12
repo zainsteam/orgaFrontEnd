@@ -14,6 +14,8 @@ import { DashboardPage } from '../dashboard/dashboard';
 import { QuicknotesPage } from '../quicknotes/quicknotes';
 import { NewtaskPage } from '../newtask/newtask';
 
+import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeInterstitialConfig } from '@ionic-native/admob-free';
+
 
 @Component({
   selector: 'page-home',
@@ -22,7 +24,9 @@ import { NewtaskPage } from '../newtask/newtask';
 export class HomePage {
   app 
   UserDetails = Array();
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private network: Network, private storage: Storage, private toastCtrl: ToastController, private alertCtrl: AlertController, public nav: Nav, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, 
+    private admob: AdMobFree,
+    public popoverCtrl: PopoverController, private network: Network, private storage: Storage, private toastCtrl: ToastController, private alertCtrl: AlertController, public nav: Nav, public loadingCtrl: LoadingController) {
 
   }
   // network
@@ -58,6 +62,38 @@ export class HomePage {
     // stop connect watch
     connectSubscription.unsubscribe();
   }
+
+  showBanner() {
+
+    let bannerConfig: AdMobFreeBannerConfig = {
+        isTesting: true, // Remove in production
+        autoShow: true
+        //id: Your Ad Unit ID goes here
+    };
+
+    this.admob.banner.config(bannerConfig);
+
+    this.admob.banner.prepare().then(() => {
+        // success
+    }).catch(e => console.log(e));
+
+}
+
+launchInterstitial() {
+
+    let interstitialConfig: AdMobFreeInterstitialConfig = {
+        isTesting: true, // Remove in production
+        autoShow: true
+        //id: Your Ad Unit ID goes here
+    }; 
+
+    this.admob.interstitial.config(interstitialConfig);
+
+    this.admob.interstitial.prepare().then(() => {
+        // success
+    });
+
+}
 
 
   // logout

@@ -24,11 +24,11 @@
 				</div>
 				<div class="error"
 					*ngIf="newTaskform.get('task_name').hasError('minlength') && newTaskform.get('task_name').touched">
-					Minimum 4 characters
+					Minimum 3 characters
 				</div>
 				<div class="error"
 					*ngIf="newTaskform.get('task_name').hasError('maxlength') && newTaskform.get('task_name').touched">
-					Maximum 12 characters
+					Maximum 50 characters
 				</div>
 			</ion-item>
 

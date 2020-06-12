@@ -17,6 +17,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { WeeklycalenderPage } from '../pages/weeklycalender/weeklycalender';
 import { MonthlycalenderPage } from '../pages/monthlycalender/monthlycalender';
 import { Network } from '@ionic-native/network';
+// import { FCM } from '@ionic-native/fcm';
 
 declare var FirebasePlugin: any;
 
@@ -30,7 +31,12 @@ export class MyApp {
 	pages: Array<{ title: string, component: any, icon: string }>;
 	UserDetails = Array();
 	constructor(private network: Network,
-		public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public storage: Storage, private alertCtrl: AlertController) {
+		public platform: Platform, 
+		public statusBar: StatusBar, 
+		public splashScreen: SplashScreen, 
+		public storage: Storage, 
+		// private fcm: FCM,
+		private alertCtrl: AlertController) {
 		this.initializeApp();
 
 		// used for an example of ngFor and navigation
@@ -143,7 +149,27 @@ export class MyApp {
 				console.log('User details is', val);
 				this.UserDetails = val;
 				this.splashScreen.hide();
+				// this.initializeFirebase();
 			});
+
+
+			// if ( (this.platform.is('ios') || this.platform.is('android')) && this.platform.is('cordova'))
+			// {
+			// 	this.fcm.subscribeToTopic('all');
+			// 	this.fcm.getToken().then(token=>{
+			// 		console.log(token);
+			// 	})
+			// 	this.fcm.onNotification().subscribe(data=>{
+			// 	  if(data.wasTapped){
+			// 		console.log("Received in background");
+			// 	  } else {
+			// 		console.log("Received in foreground");
+			// 	  };
+			// 	})
+			// 	this.fcm.onTokenRefresh().subscribe(token=>{
+			// 	  console.log(token);
+			// 	});
+			// }
 
 		});
 	}

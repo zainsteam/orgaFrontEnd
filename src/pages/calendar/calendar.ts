@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { PopoverComponent } from '../../components/popover/popover';
-
 import {AddeventPage} from '../addevent/addevent';
 import {WeeklycalenderPage} from '../weeklycalender/weeklycalender';
 import {MonthlycalenderPage} from '../monthlycalender/monthlycalender';

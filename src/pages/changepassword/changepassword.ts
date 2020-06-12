@@ -56,7 +56,7 @@ export class ChangepasswordPage {
 				"new_password": data.newpassword
 			};
 
-			let _url: string = "http://orga-nice-app.com/api/v1/user/change_password";
+			let _url: string = "http://52.29.115.88/api/v1/user/change_password";
 			this.http.post(_url, pass_change_data, { headers: this.headers })
 				.subscribe(
 					(data) => {

@@ -66,8 +66,8 @@ export class TasksPage {
 	}
 
 	get_user_categories() {
-		debugger;
-		let _url: string = "http://orga-nice-app.com/api/v1/user/user_category";
+		// debugger;
+		let _url: string = "http://52.29.115.88/api/v1/user/user_category";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id
 		}
@@ -82,13 +82,18 @@ export class TasksPage {
 	}
 
 	get_user_tasks() {
+		this.allTasks = [];
+		this.allTasksDaily = [];
+		this.allTasksWeekly = [];
+		this.allTasksMonthly = [];
+		this.allTasksUnassign = [];
 		console.log(this.urlGet);
 		let loading = this.loadingCtrl.create({
 			content: 'Please wait...'
 		});
 
 		loading.present();
-		debugger;
+		// debugger;
 		let _url: string = this.urlGet + "api/v1/user/get_user_task";
 		let postdata = {
 			'user_id': this.UserDetails['userdetails'].id
@@ -230,7 +235,8 @@ export class TasksPage {
 							console.log('Log in toast');
 						});
 						toast.present();
-						this.navCtrl.push(TasksPage);
+						this.get_user_tasks() ;
+						// this.navCtrl.push(TasksPage);
 					}
 
 				});
@@ -273,7 +279,8 @@ export class TasksPage {
 							console.log('Log in toast');
 						});
 						toast.present();
-						this.navCtrl.push(TasksPage);
+						this.get_user_tasks() ;
+						// this.navCtrl.push(TasksPage);
 					}
 				});
 	}
@@ -295,7 +302,7 @@ export class TasksPage {
 			});
 
 			loading.present();
-			let _url: string = "http://orga-nice-app.com/api/v1/user/filter_task";
+			let _url: string = "http://52.29.115.88/api/v1/user/filter_task";
 			this.http.post(_url, taskdata, { headers: this.headers })
 				.subscribe(
 					(data) => {
@@ -357,41 +364,84 @@ export class TasksPage {
 			if (this.taskdata.sortBy == 'priority') {
 				this.priority = true;
 				this.filterData = { "high": [], "medium": [], "low": [] }
-				this.allTasks[0].daily.forEach(element => {
-					if (element.priority == 'high') {
-						this.filterData.high.push(element)
-					}
-					if (element.priority == 'medium') {
-						this.filterData.medium.push(element)
-					}
-					if (element.priority == 'low') {
-						this.filterData.low.push(element)
-					}
-				});
 
-				this.allTasks[0].weekly.forEach(element => {
-					if (element.priority == 'high') {
-						this.filterData.high.push(element)
-					}
-					if (element.priority == 'medium') {
-						this.filterData.medium.push(element)
-					}
-					if (element.priority == 'low') {
-						this.filterData.low.push(element)
-					}
-				});
+				if(this.allTasks[0].daily)
+				for (let i = 0; i < this.allTasks[0].daily.length; i++) {
 
-				this.allTasks[0].monthly.forEach(element => {
-					if (element.priority == 'high') {
-						this.filterData.high.push(element)
+					if (this.allTasks[0].daily[i].priority == 'high') {
+						this.filterData.high.push(this.allTasks[0].daily[i])
 					}
-					if (element.priority == 'medium') {
-						this.filterData.medium.push(element)
+					if (this.allTasks[0].daily[i].priority == 'medium') {
+						this.filterData.medium.push(this.allTasks[0].daily[i])
 					}
-					if (element.priority == 'low') {
-						this.filterData.low.push(element)
+					if (this.allTasks[0].daily[i].priority == 'low') {
+						this.filterData.low.push(this.allTasks[0].daily[i])
 					}
-				});
+				}
+
+				if(this.allTasks[0].weekly)
+				for (let i = 0; i < this.allTasks[0].weekly.length; i++) {
+
+					if (this.allTasks[0].weekly[i].priority == 'high') {
+						this.filterData.high.push(this.allTasks[0].weekly[i])
+					}
+					if (this.allTasks[0].weekly[i].priority == 'medium') {
+						this.filterData.medium.push(this.allTasks[0].weekly[i])
+					}
+					if (this.allTasks[0].weekly[i].priority == 'low') {
+						this.filterData.low.push(this.allTasks[0].weekly[i])
+					}
+				}
+
+				if(this.allTasks[0].monthly)
+				for (let i = 0; i < this.allTasks[0].monthly.length; i++) {
+
+					if (this.allTasks[0].monthly[i].priority == 'high') {
+						this.filterData.high.push(this.allTasks[0].monthly[i])
+					}
+					if (this.allTasks[0].monthly[i].priority == 'medium') {
+						this.filterData.medium.push(this.allTasks[0].monthly[i])
+					}
+					if (this.allTasks[0].monthly[i].priority == 'low') {
+						this.filterData.low.push(this.allTasks[0].monthly[i])
+					}
+				}
+
+				// this.allTasks[0].daily.forEach(element => {
+				// 	if (element.priority == 'high') {
+				// 		this.filterData.high.push(element)
+				// 	}
+				// 	if (element.priority == 'medium') {
+				// 		this.filterData.medium.push(element)
+				// 	}
+				// 	if (element.priority == 'low') {
+				// 		this.filterData.low.push(element)
+				// 	}
+				// });
+
+				// this.allTasks[0].weekly.forEach(element => {
+				// 	if (element.priority == 'high') {
+				// 		this.filterData.high.push(element)
+				// 	}
+				// 	if (element.priority == 'medium') {
+				// 		this.filterData.medium.push(element)
+				// 	}
+				// 	if (element.priority == 'low') {
+				// 		this.filterData.low.push(element)
+				// 	}
+				// });
+
+				// this.allTasks[0].monthly.forEach(element => {
+				// 	if (element.priority == 'high') {
+				// 		this.filterData.high.push(element)
+				// 	}
+				// 	if (element.priority == 'medium') {
+				// 		this.filterData.medium.push(element)
+				// 	}
+				// 	if (element.priority == 'low') {
+				// 		this.filterData.low.push(element)
+				// 	}
+				// });
 			} else {
 				this.priority = false;
 			}
@@ -401,28 +451,65 @@ export class TasksPage {
 				this.category = true;
 				this.filterData = [];
 				let catNames = [];
-				this.allCats[0].forEach(element => {
-					catNames.push(element.category_name);
-					this.filterData[element.category_name] = [];
-				});
+				// this.allCats[0].forEach(element => {
+				// 	catNames.push(element.category_name);
+				// 	this.filterData[element.category_name] = [];
+				// });
 
-				catNames.forEach(catSingle => {
-					this.allTasks[0].daily.forEach(element => {
-						if (element.category == catSingle) {
-							this.filterData[catSingle].push(element);
+				if(this.allCats[0])
+				for (let i = 0; i < this.allCats[0].length; i++) {
+					catNames.push(this.allCats[0][i].category_name);
+					this.filterData[this.allCats[0][i].category_name] = [];
+				}
+
+				for (let i = 0; i < catNames.length; i++) {
+
+					if(this.allTasks[0].daily)
+					for (let j = 0; j < this.allTasks[0].daily.length; j++) {
+
+						if (this.allTasks[0].daily[j].category == catNames[i]) {
+							var temp = catNames[i];
+							this.filterData[temp].push(this.allTasks[0].daily[j])
 						}
-					});
-					this.allTasks[0].weekly.forEach(element => {
-						if (element.category == catSingle) {
-							this.filterData[catSingle].push(element);
+					}
+
+					if(this.allTasks[0].weekly)
+					for (let j = 0; j < this.allTasks[0].weekly.length; j++) {
+
+						if (this.allTasks[0].weekly[j].category == catNames[i]) {
+							var temp = catNames[i];
+							this.filterData[temp].push(this.allTasks[0].weekly[j])
 						}
-					});
-					this.allTasks[0].monthly.forEach(element => {
-						if (element.category == catSingle) {
-							this.filterData[catSingle].push(element);
+					}
+
+					if(this.allTasks[0].monthly)
+					for (let j = 0; j < this.allTasks[0].monthly.length; j++) {
+
+						if (this.allTasks[0].monthly[j].category == catNames[i]) {
+							var temp = catNames[i];
+							this.filterData[temp].push(this.allTasks[0].monthly[j])
 						}
-					});
-				});
+					}
+
+				}
+
+				// catNames.forEach(catSingle => {
+				// 	this.allTasks[0].daily.forEach(element => {
+				// 		if (element.category == catSingle) {
+				// 			this.filterData[catSingle].push(element);
+				// 		}
+				// 	});
+				// 	this.allTasks[0].weekly.forEach(element => {
+				// 		if (element.category == catSingle) {
+				// 			this.filterData[catSingle].push(element);
+				// 		}
+				// 	});
+				// 	this.allTasks[0].monthly.forEach(element => {
+				// 		if (element.category == catSingle) {
+				// 			this.filterData[catSingle].push(element);
+				// 		}
+				// 	});
+				// });
 				debugger;
 				console.log(this.filterData);
 				console.log(this.allCats);
@@ -434,48 +521,99 @@ export class TasksPage {
 				this.color = true;
 				this.filterData = { "green": [], "black": [], "blue": [], "red": [] }
 
-				this.allTasks[0].daily.forEach(element => {
-					if (element.color == 'green') {
-						this.filterData.green.push(element)
+				if(this.allTasks[0].daily)
+				for (let i = 0; i < this.allTasks[0].daily.length; i++) {
+
+					if (this.allTasks[0].daily[i].color == 'green') {
+						this.filterData.green.push(this.allTasks[0].daily[i])
 					}
-					if (element.color == 'black') {
-						this.filterData.black.push(element)
+					if (this.allTasks[0].daily[i].color == 'black') {
+						this.filterData.black.push(this.allTasks[0].daily[i])
 					}
-					if (element.color == 'blue') {
-						this.filterData.blue.push(element)
+					if (this.allTasks[0].daily[i].color == 'blue') {
+						this.filterData.blue.push(this.allTasks[0].daily[i])
 					}
-					if (element.color == 'red') {
-						this.filterData.red.push(element)
+					if (this.allTasks[0].daily[i].color == 'red') {
+						this.filterData.red.push(this.allTasks[0].daily[i])
 					}
-				});
-				this.allTasks[0].weekly.forEach(element => {
-					if (element.color == 'green') {
-						this.filterData.green.push(element)
+				}
+
+				if(this.allTasks[0].weekly)
+				for (let i = 0; i < this.allTasks[0].weekly.length; i++) {
+					
+					if (this.allTasks[0].weekly[i].color == 'green') {
+						this.filterData.green.push(this.allTasks[0].weekly[i])
 					}
-					if (element.color == 'black') {
-						this.filterData.black.push(element)
+					if (this.allTasks[0].weekly[i].color == 'black') {
+						this.filterData.black.push(this.allTasks[0].weekly[i])
 					}
-					if (element.color == 'blue') {
-						this.filterData.blue.push(element)
+					if (this.allTasks[0].weekly[i].color == 'blue') {
+						this.filterData.blue.push(this.allTasks[0].weekly[i])
 					}
-					if (element.color == 'red') {
-						this.filterData.red.push(element)
+					if (this.allTasks[0].weekly[i].color == 'red') {
+						this.filterData.red.push(this.allTasks[0].weekly[i])
 					}
-				});
-				this.allTasks[0].monthly.forEach(element => {
-					if (element.color == 'green') {
-						this.filterData.green.push(element)
+				}
+
+				if(this.allTasks[0].monthly)
+				for (let i = 0; i < this.allTasks[0].monthly.length; i++) {
+					
+					if (this.allTasks[0].monthly[i].color == 'green') {
+						this.filterData.green.push(this.allTasks[0].monthly[i])
 					}
-					if (element.color == 'black') {
-						this.filterData.black.push(element)
+					if (this.allTasks[0].monthly[i].color == 'black') {
+						this.filterData.black.push(this.allTasks[0].monthly[i])
 					}
-					if (element.color == 'blue') {
-						this.filterData.blue.push(element)
+					if (this.allTasks[0].monthly[i].color == 'blue') {
+						this.filterData.blue.push(this.allTasks[0].monthly[i])
 					}
-					if (element.color == 'red') {
-						this.filterData.red.push(element)
+					if (this.allTasks[0].monthly[i].color == 'red') {
+						this.filterData.red.push(this.allTasks[0].monthly[i])
 					}
-				});
+				}
+
+				// this.allTasks[0].daily.forEach(element => {
+				// 	if (element.color == 'green') {
+				// 		this.filterData.green.push(element)
+				// 	}
+				// 	if (element.color == 'black') {
+				// 		this.filterData.black.push(element)
+				// 	}
+				// 	if (element.color == 'blue') {
+				// 		this.filterData.blue.push(element)
+				// 	}
+				// 	if (element.color == 'red') {
+				// 		this.filterData.red.push(element)
+				// 	}
+				// });
+				// this.allTasks[0].weekly.forEach(element => {
+				// 	if (element.color == 'green') {
+				// 		this.filterData.green.push(element)
+				// 	}
+				// 	if (element.color == 'black') {
+				// 		this.filterData.black.push(element)
+				// 	}
+				// 	if (element.color == 'blue') {
+				// 		this.filterData.blue.push(element)
+				// 	}
+				// 	if (element.color == 'red') {
+				// 		this.filterData.red.push(element)
+				// 	}
+				// });
+				// this.allTasks[0].monthly.forEach(element => {
+				// 	if (element.color == 'green') {
+				// 		this.filterData.green.push(element)
+				// 	}
+				// 	if (element.color == 'black') {
+				// 		this.filterData.black.push(element)
+				// 	}
+				// 	if (element.color == 'blue') {
+				// 		this.filterData.blue.push(element)
+				// 	}
+				// 	if (element.color == 'red') {
+				// 		this.filterData.red.push(element)
+				// 	}
+				// });
 			} else {
 				this.color = false;
 			}

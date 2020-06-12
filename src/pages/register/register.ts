@@ -58,8 +58,8 @@ export class RegisterPage {
 		});
 
 		loading.present();
-		//let _url: string = "http://orga-nice-app.com/api/v1/user/register";
-		let _url: string = "http://orga-nice-app.com/api/v1/user/regotp";
+		//let _url: string = "http://52.29.115.88/api/v1/user/register";
+		let _url: string = "http://52.29.115.88/api/v1/user/regotp";
 		this.http.post(_url, regdata, { headers: this.headers })
 			.subscribe(
 				(data) => {
@@ -116,8 +116,8 @@ export class RegisterPage {
 			});
 
 			loading.present();
-			//let _url: string = "http://orga-nice-app.com/api/v1/user/register";
-			let _url: string = "http://orga-nice-app.com/api/v1/user/regotpverify";
+			//let _url: string = "http://52.29.115.88/api/v1/user/register";
+			let _url: string = "http://52.29.115.88/api/v1/user/regotpverify";
 			this.http.post(_url, regdata, { headers: this.headers })
 				.subscribe(
 					(data) => {
@@ -188,8 +188,8 @@ export class RegisterPage {
 			  });
   
 			  loading.present(); 
-		//let _url: string = "http://orga-nice-app.com/api/v1/user/register";
-		let _url: string = "http://orga-nice-app.com/api/v1/user/reg";
+		//let _url: string = "http://52.29.115.88/api/v1/user/register";
+		let _url: string = "http://52.29.115.88/api/v1/user/reg";
 		this.http.post(_url, regdata, { headers: this.headers })
 		  .subscribe(
 			(data) => {
