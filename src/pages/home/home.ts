@@ -29,8 +29,13 @@ export class HomePage {
     public popoverCtrl: PopoverController, private network: Network, private storage: Storage, private toastCtrl: ToastController, private alertCtrl: AlertController, public nav: Nav, public loadingCtrl: LoadingController) {
 
   }
+
+  ngOnInit(){
+  }
+
   // network
   ionViewDidLoad(){
+    this.showBanner();
     this.storage.get("userdetails").then((userval) => {
       //console.log('User details is', userval);
       this.UserDetails = userval;

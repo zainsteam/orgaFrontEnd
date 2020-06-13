@@ -5,7 +5,7 @@ import { TasksPage } from '../tasks/tasks';
 import { FormControl, FormGroup, Validators, Form } from '@angular/forms';
 import { Http, Headers, Response } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 @Component({
 	selector: 'page-newtask',
@@ -27,7 +27,7 @@ export class NewtaskPage {
 	}
 
 	ngOnInit() {
-		this.taskdata.due_date = moment(this.due_date).local().format("YYYY-MM-DD[T]HH:mm:ss.000") + 'Z';
+		// this.taskdata.due_date = moment(this.due_date).local().format("YYYY-MM-DD[T]HH:mm:ss.000") + 'Z';
 
 		this.newTaskform = new FormGroup({
 			task_name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
@@ -127,7 +127,8 @@ export class NewtaskPage {
 					'color': data.color,
 					'due_date': data.due_date,
 					'sub_tasks': this.subtaskArray,
-					'type': 'task'
+					'type': 'task',
+					'calendar' : 'no'
 				}
 				console.log(taskdata);
 				let _url: string = "http://52.29.115.88/api/v1/user/create_task";

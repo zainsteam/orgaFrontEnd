@@ -2,7 +2,7 @@
   "_args": [
     [
       "cordova-sqlite-storage@3.4.1",
-      "D:\\Basit\\projects\\orgaFrontEnd"
+      "D:\\project\\IONIC\\orga basit\\orgaFrontEnd"
     ]
   ],
   "_from": "cordova-sqlite-storage@3.4.1",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/cordova-sqlite-storage/-/cordova-sqlite-storage-3.4.1.tgz",
   "_spec": "3.4.1",
-  "_where": "D:\\Basit\\projects\\orgaFrontEnd",
+  "_where": "D:\\project\\IONIC\\orga basit\\orgaFrontEnd",
   "author": {
     "name": "various"
   },

@@ -105,8 +105,8 @@
 				<ion-label class="input_label" color="inputcolor" style="font-family: quicksandsR!important;"><img
 						style="max-width: 17px; position: absolute; left: 0;" src="../../assets/imgs/inputclndr.svg" />
 					Due Date</ion-label>
-				<ion-datetime class="input_form" displayFormat="DD MM YYYY H:mm" [(ngModel)]="taskdata.due_date"
-					formControlName="due_date" min="{{taskdata.due_date}}"></ion-datetime>
+				<ion-datetime  class="input_form" displayFormat="D MMM YYYY H:mm" [(ngModel)]="taskdata.due_date"
+					formControlName="due_date" min="{{due_date}}"></ion-datetime>
 			</ion-item>
 
 

@@ -2,7 +2,7 @@
   "_args": [
     [
       "cordova-plugin-network-information@2.0.2",
-      "D:\\Basit\\projects\\orgaFrontEnd"
+      "D:\\project\\IONIC\\orga basit\\orgaFrontEnd"
     ]
   ],
   "_from": "cordova-plugin-network-information@2.0.2",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/cordova-plugin-network-information/-/cordova-plugin-network-information-2.0.2.tgz",
   "_spec": "2.0.2",
-  "_where": "D:\\Basit\\projects\\orgaFrontEnd",
+  "_where": "D:\\project\\IONIC\\orga basit\\orgaFrontEnd",
   "author": {
     "name": "Apache Software Foundation"
   },

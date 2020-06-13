@@ -2,7 +2,7 @@
   "_args": [
     [
       "cordova-plugin-splashscreen@5.0.3",
-      "D:\\Basit\\projects\\orgaFrontEnd"
+      "D:\\project\\IONIC\\orga basit\\orgaFrontEnd"
     ]
   ],
   "_from": "cordova-plugin-splashscreen@5.0.3",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/cordova-plugin-splashscreen/-/cordova-plugin-splashscreen-5.0.3.tgz",
   "_spec": "5.0.3",
-  "_where": "D:\\Basit\\projects\\orgaFrontEnd",
+  "_where": "D:\\project\\IONIC\\orga basit\\orgaFrontEnd",
   "author": {
     "name": "Apache Software Foundation"
   },

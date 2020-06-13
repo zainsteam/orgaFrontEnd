@@ -2,7 +2,7 @@
   "_args": [
     [
       "cordova-plugin-ionic-keyboard@2.2.0",
-      "D:\\Basit\\projects\\orgaFrontEnd"
+      "D:\\project\\IONIC\\orga basit\\orgaFrontEnd"
     ]
   ],
   "_from": "cordova-plugin-ionic-keyboard@2.2.0",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/cordova-plugin-ionic-keyboard/-/cordova-plugin-ionic-keyboard-2.2.0.tgz",
   "_spec": "2.2.0",
-  "_where": "D:\\Basit\\projects\\orgaFrontEnd",
+  "_where": "D:\\project\\IONIC\\orga basit\\orgaFrontEnd",
   "author": {
     "name": "Apache Software Foundation"
   },

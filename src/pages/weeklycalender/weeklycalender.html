@@ -5,10 +5,15 @@
 </ion-header>
 
 <ion-content padding>
+	<ion-label *ngIf="alltaskunapprove.length > 0">Latest Task : (click to add into calendar)</ion-label>
+		<ion-chip color="primary" style="margin-right: 15px;" *ngFor="let item of alltaskunapprove" (click)="addtocalendar(item)">
+			<ion-label color="dark" >{{item.text}}</ion-label>
+		</ion-chip>
+
 	<div #scheduler_here class="dhx_cal_container" style="width: 100%; height:100vh">
 		<div class="dhx_cal_navline">
 			<div class="dhx_cal_prev_button">&nbsp;</div>
-			<div class="dhx_cal_next_button" >&nbsp;</div>
+			<div class="dhx_cal_next_button">&nbsp;</div>
 			<div class="dhx_cal_today_button"></div>
 			<div class="dhx_cal_date"></div>
 			<div class="dhx_cal_tab" name="day_tab"></div>

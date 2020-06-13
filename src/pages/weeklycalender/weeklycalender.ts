@@ -24,6 +24,8 @@ export class WeeklycalenderPage implements OnInit {
 	public UserDetails = Array();
 	public loading;
 	allTasks = Array();
+	alltaskapprove = Array();
+	alltaskunapprove = Array();
 	allTasksDaily = Array();
 	allTasksWeekly = Array();
 	allTasksMonthly = Array();
@@ -126,6 +128,7 @@ export class WeeklycalenderPage implements OnInit {
 	}
 
 	get_user_tasks() {
+		
 
 		// debugger;
 
@@ -216,7 +219,9 @@ export class WeeklycalenderPage implements OnInit {
 				'user_id': this.UserDetails['userdetails'].id,
 				'taskdata': ev,
 				'start_date': start_date,
-				'end_date': end_date
+				'end_date': end_date,
+				'calendar' : ev.calendar
+
 			};
 			console.log(ev.start_date);
 			let _url: string = this.urlGet + "api/v1/user/update_user_task";
@@ -302,6 +307,8 @@ export class WeeklycalenderPage implements OnInit {
 			'user_id': this.UserDetails['userdetails'].id
 		}
 
+		this.alltaskunapprove = [];
+
 		this.http.post(_url, postdata, { headers: this.headers })
 			.subscribe(
 				(data) => {
@@ -311,18 +318,34 @@ export class WeeklycalenderPage implements OnInit {
 
 					this.allTasks.push(taskList.all_tasks);
 
-
 					console.log(this.allTasks[0]);
-					scheduler.parse(this.allTasks[0], "json");
+					for (var a = 0; a < (this.allTasks[0].length);a++){
+						if(this.allTasks[0][a].calendar == "" || this.allTasks[0][a].calendar == "yes" ){
+							this.alltaskapprove.push(this.allTasks[0][a]);
+						}
+						else if(this.allTasks[0][a].calendar == "no"){
+							if(this.allTasks[0][a].id != this.allTasks[0][a-1].id)
+							this.alltaskunapprove.push(this.allTasks[0][a]);
+						}
+					}
+					console.log(this.alltaskunapprove);
+					console.log(this.alltaskapprove);
+					scheduler.parse(this.alltaskapprove, "json");
 					this.dismissLoading();
-
+					
 				}, err => {
 					this.dismissLoading();
 				});
+				
+				// for(var a = 0 ; a < this.allTasks[0].length;a++){
+					console.log(this.allTasks[0]);
+				// }
 
 
 		this.get_user_unassigntasks();
 	}
+	
+
 
 	get_user_unassigntasks() {
 
@@ -336,13 +359,15 @@ export class WeeklycalenderPage implements OnInit {
 		this.http.post(_url, postdata, { headers: this.headers })
 			.subscribe(
 				(data) => {
+					
 					let taskList = JSON.parse(data["_body"]);
 					console.log(taskList.all_tasks.daily);
 					this.allTasksDaily.push(taskList.all_tasks.daily);
+					console.log(taskList.all_tasks);
 					this.allTasksWeekly.push(taskList.all_tasks.weekly);
 					this.allTasksMonthly.push(taskList.all_tasks.monthly);
 					this.allTasksUnassign.push(taskList.all_tasks.unassigned);
-					console.log(this.allTasksWeekly);
+					console.log(taskList.all_tasks.unassigned);
 					this.dismissLoading();
 
 				}, (err) => {
@@ -363,5 +388,54 @@ export class WeeklycalenderPage implements OnInit {
 		var data = [date.getFullYear(), mnth, day].join("-");
 		data = data + ' ' + hours + ':' + min
 		return data;
+	}
+	addtocalendar(taskdata){
+		taskdata.calendar = "yes";
+
+		var start_date = this.convert(taskdata.start_date);
+			var end_date = this.convert(taskdata.end_date);
+			console.log(start_date);
+			let taskdata2 = {
+				'user_id': this.UserDetails['userdetails'].id,
+				'taskdata': taskdata,
+				'start_date': start_date,
+				'end_date': end_date,
+				'calendar' : taskdata.calendar
+			};
+		let _url: string = this.urlGet + "api/v1/user/update_user_task";
+			this.http.post(_url, taskdata2, { headers: this.headers })
+				.subscribe(
+					(data) => {
+						let result = JSON.parse(data["_body"]);
+						console.log(result);
+						if (result.status == "failed") {
+							// console.log(result);
+							let toast = this.toastCtrl.create({
+								message: result.message,
+								duration: 3000,
+								position: 'top',
+								cssClass: "customtoast",
+							});
+							toast.onDidDismiss(() => {
+								console.log('Dismissed toast');
+							});
+							toast.present();
+						} else {
+							let toast = this.toastCtrl.create({
+								message: result.message,
+								duration: 3000,
+								position: 'top',
+								cssClass: "customtoast",
+							});
+
+							this.get_user_tasks();
+
+							toast.onDidDismiss(() => {
+								console.log('Log in toast');
+							});
+							toast.present();
+						}
+					});
+
 	}
 }
