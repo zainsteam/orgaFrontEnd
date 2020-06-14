@@ -1336,6 +1336,7 @@ var WeeklycalenderPage = /** @class */ (function () {
         // // debugger;
         this.urlGet = global.url;
     }
+    WeeklycalenderPage_1 = WeeklycalenderPage;
     WeeklycalenderPage.prototype.ionViewWillLeave = function () {
         // debugger;
         console.log('Looks like I’m about to leave');
@@ -1409,19 +1410,27 @@ var WeeklycalenderPage = /** @class */ (function () {
         }
     };
     WeeklycalenderPage.prototype.get_user_tasks = function () {
-        // debugger;
         var _this = this;
+        this.allTasks = [];
+        this.allTasksDaily = [];
+        this.allTasksWeekly = [];
+        this.allTasksMonthly = [];
+        this.allTasksUnassign = [];
+        // debugger;
         this.showLoading();
         scheduler.clearAll();
         scheduler.config.date_format = '%Y-%m-%d %H:%i';
         scheduler.config.touch_swipe_dates = true;
-        scheduler.config.touch_drag = 150;
-        scheduler.config.show_loading = true;
+        scheduler.config.touch_drag = 300;
+        scheduler.config.event_duration = 200;
+        // scheduler.config.delay_render = 90;
+        // scheduler.config.show_loading = true;
         scheduler.config.touch = "force";
         scheduler.init(this.schedulerContainer.nativeElement, new Date(), "week");
+        // hide (creating event) as per client says
         scheduler.attachEvent('onEventAdded', function (id, ev) {
             // debugger;
-            console.log('event added ', ev);
+            console.log('event added ', ev.end_date);
             console.log('event id ', id);
             var start_date_Hours = ev.start_date.getHours();
             var start_date_mins = ev.start_date.getMinutes();
@@ -1660,26 +1669,34 @@ var WeeklycalenderPage = /** @class */ (function () {
                     position: 'top',
                     cssClass: "customtoast",
                 });
-                _this.get_user_tasks();
                 toast.onDidDismiss(function () {
                     console.log('Log in toast');
                 });
                 toast.present();
             }
         });
+        this.navCtrl.push(WeeklycalenderPage_1);
+        // this.ionViewDidEnter();
+        // scheduler.clearAll();
+        // this.get_user_tasks();
+        // scheduler.clearAll();
+        // scheduler.setCurrentView();
+        // scheduler.updateCollection(this.alltaskapprove);
+        // scheduler.updateView(new Date(taskdata2.start_date));
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("scheduler_here"),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
     ], WeeklycalenderPage.prototype, "schedulerContainer", void 0);
-    WeeklycalenderPage = __decorate([
+    WeeklycalenderPage = WeeklycalenderPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* ViewEncapsulation */].None,
-            selector: 'page-weeklycalender',template:/*ion-inline-start:"D:\project\IONIC\orga basit\orgaFrontEnd\src\pages\weeklycalender\weeklycalender.html"*/'<ion-header>\n\n	<ion-navbar class="header_font" color="primary">\n\n		<ion-title>Weekly Calendar</ion-title>\n\n	</ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n	<ion-label *ngIf="alltaskunapprove.length > 0">Latest Task : (click to add into calendar)</ion-label>\n\n		<ion-chip color="primary" style="margin-right: 15px;" *ngFor="let item of alltaskunapprove" (click)="addtocalendar(item)">\n\n			<ion-label color="dark" >{{item.text}}</ion-label>\n\n		</ion-chip>\n\n\n\n	<div #scheduler_here class="dhx_cal_container" style="width: 100%; height:100vh">\n\n		<div class="dhx_cal_navline">\n\n			<div class="dhx_cal_prev_button">&nbsp;</div>\n\n			<div class="dhx_cal_next_button">&nbsp;</div>\n\n			<div class="dhx_cal_today_button"></div>\n\n			<div class="dhx_cal_date"></div>\n\n			<div class="dhx_cal_tab" name="day_tab"></div>\n\n			<div class="dhx_cal_tab" name="week_tab"></div>\n\n			<div class="dhx_cal_tab" name="month_tab"></div>\n\n		</div>\n\n		<div class="dhx_cal_header"></div>\n\n		<div class="dhx_cal_data"></div>\n\n	</div>\n\n	<!-- <button ion-button block (click)="deleteEvent()" class="save_btn save_btn_delete">Delete</button> -->\n\n</ion-content>'/*ion-inline-end:"D:\project\IONIC\orga basit\orgaFrontEnd\src\pages\weeklycalender\weeklycalender.html"*/,
+            selector: 'page-weeklycalender',template:/*ion-inline-start:"D:\project\IONIC\orga basit\orgaFrontEnd\src\pages\weeklycalender\weeklycalender.html"*/'<ion-header>\n\n	<ion-navbar class="header_font" color="primary">\n\n		<ion-title>Weekly Calendar</ion-title>\n\n	</ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n	<ion-label *ngIf="alltaskunapprove.length > 0">To-Dos</ion-label>\n\n		<ion-chip color="primary" style="margin-right: 15px;" *ngFor="let item of alltaskunapprove" (click)="addtocalendar(item)">\n\n			<ion-label color="dark" >{{item.text}}</ion-label>\n\n		</ion-chip>\n\n\n\n	<div #scheduler_here class="dhx_cal_container" style="width: 100%; height:100vh">\n\n		<div class="dhx_cal_navline">\n\n			<div class="dhx_cal_prev_button">&nbsp;</div>\n\n			<div class="dhx_cal_next_button">&nbsp;</div>\n\n			<div class="dhx_cal_today_button"></div>\n\n			<div class="dhx_cal_date"></div>\n\n			<div class="dhx_cal_tab" name="day_tab"></div>\n\n			<div class="dhx_cal_tab" name="week_tab"></div>\n\n			<div class="dhx_cal_tab" name="month_tab"></div>\n\n		</div>\n\n		<div class="dhx_cal_header"></div>\n\n		<div class="dhx_cal_data"></div>\n\n	</div>\n\n	<!-- <button ion-button block (click)="deleteEvent()" class="save_btn save_btn_delete">Delete</button> -->\n\n</ion-content>'/*ion-inline-end:"D:\project\IONIC\orga basit\orgaFrontEnd\src\pages\weeklycalender\weeklycalender.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__providers_global_global__["a" /* GlobalProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* PopoverController */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]])
     ], WeeklycalenderPage);
     return WeeklycalenderPage;
+    var WeeklycalenderPage_1;
 }());
 
 //# sourceMappingURL=weeklycalender.js.map

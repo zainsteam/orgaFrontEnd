@@ -128,6 +128,11 @@ export class WeeklycalenderPage implements OnInit {
 	}
 
 	get_user_tasks() {
+		this.allTasks = [];
+		this.allTasksDaily = [];
+		this.allTasksWeekly = [];
+		this.allTasksMonthly = [];
+		this.allTasksUnassign = [];
 		
 
 		// debugger;
@@ -140,15 +145,21 @@ export class WeeklycalenderPage implements OnInit {
 
 		scheduler.config.touch_swipe_dates = true;
 
-		scheduler.config.touch_drag = 150;
-		scheduler.config.show_loading = true;
+		scheduler.config.touch_drag = 300;
+		scheduler.config.event_duration = 200; 
+		// scheduler.config.delay_render = 90;
+ 
+
+		// scheduler.config.show_loading = true;
 		scheduler.config.touch = "force";
 		scheduler.init(this.schedulerContainer.nativeElement, new Date(), "week");
+
+		// hide (creating event) as per client says
 
 
 		scheduler.attachEvent('onEventAdded', (id, ev) => {
 			// debugger;
-			console.log('event added ', ev);
+			console.log('event added ', ev.end_date);
 			console.log('event id ', id);
 			var start_date_Hours = ev.start_date.getHours();
 			var start_date_mins = ev.start_date.getMinutes();
@@ -309,6 +320,7 @@ export class WeeklycalenderPage implements OnInit {
 
 		this.alltaskunapprove = [];
 
+
 		this.http.post(_url, postdata, { headers: this.headers })
 			.subscribe(
 				(data) => {
@@ -427,15 +439,22 @@ export class WeeklycalenderPage implements OnInit {
 								position: 'top',
 								cssClass: "customtoast",
 							});
-
-							this.get_user_tasks();
-
+							
 							toast.onDidDismiss(() => {
 								console.log('Log in toast');
 							});
 							toast.present();
 						}
 					});
+					this.navCtrl.push(WeeklycalenderPage);
+					// this.ionViewDidEnter();
+					// scheduler.clearAll();
+					// this.get_user_tasks();
+					// scheduler.clearAll();
+					// scheduler.setCurrentView();
+					// scheduler.updateCollection(this.alltaskapprove);
+					// scheduler.updateView(new Date(taskdata2.start_date));
 
-	}
+				
+				}
 }

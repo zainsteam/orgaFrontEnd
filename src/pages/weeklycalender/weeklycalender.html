@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-	<ion-label *ngIf="alltaskunapprove.length > 0">Latest Task : (click to add into calendar)</ion-label>
+	<ion-label *ngIf="alltaskunapprove.length > 0">To-Dos</ion-label>
 		<ion-chip color="primary" style="margin-right: 15px;" *ngFor="let item of alltaskunapprove" (click)="addtocalendar(item)">
 			<ion-label color="dark" >{{item.text}}</ion-label>
 		</ion-chip>
