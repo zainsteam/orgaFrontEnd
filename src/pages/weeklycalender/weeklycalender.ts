@@ -146,7 +146,7 @@ export class WeeklycalenderPage implements OnInit {
 		scheduler.config.touch_swipe_dates = true;
 
 		scheduler.config.touch_drag = 300;
-		scheduler.config.event_duration = 200; 
+		// scheduler.config.event_duration = 200; 
 		// scheduler.config.delay_render = 90;
  
 
